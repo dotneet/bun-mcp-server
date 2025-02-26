@@ -2,6 +2,7 @@
 
 ## Implementation Rules
 
+- See [mcp.mdc](.cursor/rules/mcp.mdc) at first and learn how to implement a MCP Server.
 - Generate a appropriate package name and overwrite package.json
 - Some examples using `setRequestHandler()` to implement a tool or resource, but it's deprecated. Use `server.tool()` or `server.resource()` instead.
 - You can add a thrid party package if needed to meet the requirements.
@@ -36,6 +37,7 @@
 
 - Resources should be pure and not have side effects (like GET endpoints)
 - Tools should handle specific actions with well-defined parameters (like POST endpoints)
+- Write a enough description for tool and each parameters.
 - Use ResourceTemplate for parameterized resources
 - Properly handle errors in tool implementations and return isError: true
 

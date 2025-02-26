@@ -25,12 +25,21 @@ const server = new McpServer({
   version: "1.0.0"
 });
 
-// Add an addition tool
-server.tool("add",
-  { a: z.number(), b: z.number() },
-  async ({ a, b }) => ({
-    content: [{ type: "text", text: String(a + b) }]
-  })
+// Example: Add a BMI calculator
+server.tool(
+  // tool name
+  "calculate_bmi",
+  // description
+  "Calculate BMI to see if you are overweight.",
+  // input schema
+  {
+    height: z.number().describe("Height in cm"),
+    weight: z.number().describe("Weight in kg"),
+  },
+  // tool implementation
+  async ({ height, weight }) => ({
+    content: [{ type: "text", text: String(weight / (height * height)) }],
+  }),
 );
 
 // Add a dynamic greeting resource
