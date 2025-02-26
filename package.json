@@ -7,6 +7,9 @@
     "build": "mkdir -p dist && bun build --compile --outfile=dist/$npm_package_name index.ts",
     "show-package-name": "echo $npm_package_name"
   },
+  "bun-create": {
+    "start": "bun run echo 'Read README.md and implement an MCP server'"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
