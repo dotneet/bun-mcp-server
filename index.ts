@@ -12,17 +12,16 @@ const server = new McpServer({
 });
 
 // Example: Add a BMI calculator
-server.tool(
-  // tool name
+server.registerTool(
   "calculate_bmi",
-  // description
-  "Calculate BMI to see if you are overweight.",
-  // input schema
   {
-    height: z.number().describe("Height in cm"),
-    weight: z.number().describe("Weight in kg"),
+    title: "BMI Calculator",
+    description: "Calculate BMI to see if you are overweight.",
+    inputSchema: {
+      height: z.number().describe("Height in cm"),
+      weight: z.number().describe("Weight in kg"),
+    },
   },
-  // tool implementation
   async ({ height, weight }) => {
     const heightInMeter = height / 100;
     const bmi = weight / (heightInMeter * heightInMeter);
@@ -33,14 +32,15 @@ server.tool(
 );
 
 // Example: Add a prompt
-server.prompt(
-  // prompt name
+server.registerPrompt(
   "greeting",
-  // description
-  "Greet the user with a friendly message.",
-  // input schema
-  { name: z.string().describe("The name of the user") },
-  // prompt implementation
+  {
+    title: "Greeting Prompt",
+    description: "Greet the user with a friendly message.",
+    argsSchema: {
+      name: z.string().describe("The name of the user"),
+    },
+  },
   ({ name }) => ({
     messages: [
       {
@@ -55,9 +55,13 @@ server.prompt(
 );
 
 // Example: Add a dynamic greeting resource
-server.resource(
+server.registerResource(
   "greeting",
   new ResourceTemplate("greeting://{name}", { list: undefined }),
+  {
+    title: "Greeting Resource",
+    description: "Get a personalized greeting message.",
+  },
   async (uri, { name }) => ({
     contents: [
       {
